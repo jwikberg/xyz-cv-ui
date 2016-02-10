@@ -179,7 +179,7 @@
                     <i class="fa fa-edit"></i>
                 </div>
                 <div>
-                    <div class="itemrow skillrow" ng-class="{'removeTopBorder': $first}" dir-paginate="skill in vm.skills | itemsPerPage: 15">
+                    <div class="itemrow skillrow" ng-class="{'removeTopBorder': $first}" dir-paginate="skill in vm.skills | itemsPerPage: 10">
                         <div class="image-box">
                             <i class="{{ skill.icon }}"></i>
                         </div>
@@ -207,6 +207,11 @@
                                         </ng-pluralize>
                                     </div>
                                 </div>
+								<div class="profileSkillTags">
+									<div class="profileskilltag" ng-repeat="tag in skill.tags">
+										<span class="badge">{{tag}}</span>
+									</div>
+								</div>
                                 <div class="col-xs-6 col-md-6" ng-if="skill.endorsements">
                                     <div class="endorsements">
                                         <div class="count">5 <i class="fa fa-thumbs-up"></i></div>
