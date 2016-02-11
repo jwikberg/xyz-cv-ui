@@ -47,6 +47,7 @@ input + .typeahead.ng-hide { display: block !important; visibility: hidden !impo
         @include border-radius(0);
         padding: 0 15px;
         border: none;
+		margin-bottom: auto;
         > a {
             text-decoration: none;
             color: $textcolor;
