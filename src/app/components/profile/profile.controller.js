@@ -67,6 +67,9 @@
             /* SKILLS */
             vm.skills = [];
 
+            /* SKILLGROUPS */
+            vm.skillGroups = [];
+
             /* CERTIFICATES */
             vm.certificates = [];
 
@@ -101,6 +104,7 @@
                         setPrivateInfo(model);
                         setSummary(model);
                         setSkills(model);
+                        setSkillGroups(model);
                         setCertificates(model);
                         setAssignments(model);
                         setCloud(model);
@@ -158,6 +162,10 @@
 
             function setSkills(model) {
                 vm.skills = model.user.skills;
+            }
+
+            function setSkillGroups(model) {
+                vm.skillGroups = model.user.skillGroups;
             }
 
             function setCertificates(model) {
