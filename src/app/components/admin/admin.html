@@ -1,0 +1,25 @@
+<div class="row admin" ng-if="vm.isAllowed('canViewAdmin')">
+	<div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 col-sm-12" ng-show="vm.activated">
+        <div class="panel-wrapper skills">
+            <div class="panel panel-default admin-default">
+                <div class="image-panel hidden-xs hidden-sm">
+                    <div class="image-wrapper">
+                        <i class="fa fa-flask"></i>
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    Uncategorized Skills
+                </div>
+                <div class="editbutton" ng-click="vm.showModal(vm.skillCategoriesModal, vm.skills)" ng-show="vm.isAllowed('canEditUser') || vm.isSelf(vm.user._id)">
+                    <i class="fa fa-edit"></i>
+                </div>
+                <div class="panel-body" ng-if="(vm.skills | filter: { skillGroupId: '!' }).length > 0">
+                    There are currently {{ (vm.skills | filter: { skillGroupId: '!' }).length }} uncategorized skills.
+                </div>
+                <div class="panel-body" ng-if="(vm.skills | filter: { skillGroupId: '!' }).length === 0">
+                    There are currently no uncategorized skills.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

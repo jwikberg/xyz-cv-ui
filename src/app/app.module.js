@@ -29,7 +29,8 @@
         'xyz-cv-ui.menu',
         'xyz-cv-ui.office',
         'xyz-cv-ui.feed',
-        'xyz-cv-ui.advancedSearch'
+        'xyz-cv-ui.advancedSearch',
+        'xyz-cv-ui.admin'
     ]);
 
 })();

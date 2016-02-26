@@ -8,6 +8,14 @@
             </div>{{ vm.user.name | capitalize }}
         </a>
         <ul class="sidebar-nav" ng-model="vm.panels.activePanel" data-allow-multiple="true" bs-collapse>
+            <li ng-if="vm.isAllowed('canViewAdmin')">
+                <a ng-href="#/admin">
+                    <div class="sidebar-icon pull-left">
+                        <i class="fa fa-cogs"></i>
+                    </div>
+                    Admin
+                </a>
+            </li>
             <li>
                 <a ng-href="#/feed">
                     <div class="sidebar-icon pull-left">

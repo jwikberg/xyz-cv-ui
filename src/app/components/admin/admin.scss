@@ -1,0 +1,379 @@
+@import "styles/_base";
+@import "styles/_colors";
+
+
+.admin {
+
+    .center {
+        text-align: center;
+    }
+
+    .panel-wrapper {
+        background: transparent;
+        min-height: 116px;
+    }
+    .image-panel {
+        text-align: center;
+        color: $bodybackground;
+        background-color: white;
+        .image-wrapper {
+            position: relative;
+            >img {
+                vertical-align: top;
+            }
+            >i {
+                @media(max-width: 992px) {
+                    font-size: 80px;
+                    margin-top: 20px;
+                    margin-left: 20px;
+                }
+            }
+            overflow: hidden;
+            @media(min-width: 992px) {
+                @include box-shadow(0 1px 2px rgba(0,0,0,0.2));
+                height: 116px;
+                width: 116px;
+                position: absolute;
+                left: -111px;
+                font-size: 80px;
+                line-height: 116px;
+                >img {
+                    height: 116px;
+                    width: 116px;
+                    top: 0;
+                    left: 0;
+                    z-index: 0;
+                    position: absolute;
+                }
+                >i {
+                    top: 0;
+                    left: 0;
+                    z-index: 0;
+                    position: absolute;
+                    width: 116px;
+                    height: 116px;
+                    background-color: white;
+                    line-height: 116px;
+                }
+                >.image-overlay {
+                    display: flex;
+                    z-index: 1;
+                    position: absolute;
+                    height: 116px;
+                    width: 116px;
+                    background: rgba(0,0,0,.75);
+                    text-align: center;
+                    opacity: 0;
+                    cursor: pointer;
+                    -webkit-transition: opacity .25s ease;
+                    -moz-transition: opacity .25s ease;
+                    &:hover {
+                        opacity: 1;
+                    }
+                    >i {
+                        width: 100%;
+                        text-align: center;
+                        line-height: 116px;
+                        color:rgba(255,255,255,.85);
+                        font-size:80px;
+                    }
+                }
+            }
+        }
+    }
+
+    .admin-default {
+        .editbutton {
+            position: absolute;
+            right: 15px;
+            top: 0;
+            background-color: white;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+            &:hover {
+                background-color: lightgrey;
+            }
+        }
+        overflow: hidden;
+        display: block;
+        .data-header {
+            display: flex;
+            margin: -15px -15px 0px -15px;
+            .image-panel {
+                margin: 0px 0px;
+                min-height: 136px;
+                min-width: 96px;
+                height: 100%;
+                width: 96px;
+                >img {
+                    margin-top: 20px;
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+            .data-panel {
+                padding: 15px;
+                width: 100%;
+            }
+        }
+        .data-box {
+            padding: 15px;
+            width: 100%;
+            .name {
+                display: inline-block;
+            }
+
+            .office {
+                display: inline-block;
+            }
+
+            .skilltag {
+                font-size: 75%;
+                font-weight: bold;
+                background-color: $tagcolor;
+                @include border-radius(100px);
+                padding: 2px 6px;
+                margin: 0 2px;
+                display: inline-block;
+            }
+        }
+        .table.table-skills {
+            .category-heading {
+                background-color: #F3F3F3;
+            }
+			.number {
+				text-align: center;
+			}
+        }
+    }
+
+    .itemrow {
+        overflow: hidden;
+        display: flex;
+        border-top: 1px solid #ddd;
+        &:first-of-type {
+            border-top: none;
+        }
+        .image-box {
+            margin: 15px;
+            color: #e0e0e0;
+            display: inline-block;
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+            width: 40px;
+            >img {
+                height: 40px;
+                width: 40px;
+            }
+        }
+        .data-box {
+            width: 100%;
+        }
+
+        &.skillrow {
+            .image-box {
+                color: #3D606E;
+                .fa-flask {
+                    color: #e0e0e0;
+                }
+            }
+            .data-box {
+                padding-left: 0;
+                .name {
+                    display: inline-block;
+                    font-weight: bold;
+                }
+                .level {
+                    display: inline-block;
+                    /*padding: 0 5px;
+                    @include box-shadow(0px 1px 0px rgba(0, 0, 0, 0.2));
+
+                    &.l1 {
+                        background-color: #dcedff;
+                    }
+                    &.l2 {
+                        background-color: #a3cdff;
+                    }
+                    &.l3 {
+                        background-color: #93b1ff;
+                    }
+                    &.l4 {
+                        background-color: #4b97ff;
+                    }
+                    &.l5 {
+                        background-color: #347cff;
+                    }*/
+                }
+                .year {
+                    display: inline-block;
+                }
+            }
+            .endorsements {
+                text-align: right;
+                line-height: 60px;
+                .count {
+                    background-color: #B0D3E0;
+                    @include border-radius(5px);
+                    display: inline-block;
+                    color: grey;
+                    max-height: 24px;
+                    min-height: 24px;
+                    line-height: 1em;
+                    padding: 4px;
+                }
+                .endorsement {
+                    display: inline-block;
+                    img {
+                        min-height: 24px;
+                        max-height: 24px;
+                        max-width: 24px;
+                        @include border-radius(5px);
+                        margin-left: 1px;
+                    }
+                }
+            }
+        }
+
+        &.assignmentrow {
+            min-height: 75px;
+            .data-box {
+                .name {
+                    font-weight: bold;
+                }
+                .skilltag {
+                    font-size: 75%;
+                    background-color: $tagcolor;
+                    @include border-radius(100px);
+                    padding: 2px 6px;
+                    margin: 0 2px;
+                    display: inline-block;
+                }
+            }
+        }
+
+        &.certificaterow {
+            .name {
+                font-weight: bold;
+            }
+            .date {
+
+            }
+        }
+    }
+
+    #general-info, #private-info {
+        .flag-icon {
+            @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+        }
+        .name {
+            font-size: 200%;
+            @media (max-width: 768px) {
+                font-size: 120%;
+            }
+            display: inline-block;
+        }
+        .title {
+            font-size: 120%;
+            @media (max-width: 768px) {
+                font-size: 100%;
+            }
+        }
+        .contact {
+            color: lighten($textcolor, 40%);
+            @media (max-width: 768px) {
+                font-size: 90%;
+            }
+            >span {
+                display: inline-block;
+                padding-left: 5px;
+                padding-right: 2px;
+                border-left: 1px solid lighten($textcolor, 40%);
+                &:first-of-type {
+                    padding-left: 0;
+                    border: none;
+                }
+            }
+        }
+        .role {
+            font-size: 80%;
+            display: inline-block;
+            opacity: 0.8;
+        }
+        .employee {
+
+        }
+    }
+
+    #summary {
+        p {
+            word-break: break-word;
+        }
+    }
+
+    #tags {
+        min-height: 232px;
+    }
+
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: opacity .15s linear;
+        &.ng-enter {
+            opacity: .0;
+            &.ng-enter-active {
+                opacity: .5;
+            }
+        }
+        &.ng-leave {
+            opacity: .5;
+            &.ng-leave-active {
+                opacity: 0;
+            }
+        }
+    }
+
+    .alert {
+        display: block;
+        margin-top: 15px;
+    }
+
+    .dropdown-menu {
+        @include border-radius(0);
+    }
+
+    .sheet-label {
+        font-size: 80%;
+        font-weight: normal;
+        height: 20px;
+        line-height: 20px;
+        color: grey;
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .sheet-value {
+    }
+
+    .skills {
+        .panel {
+            .panel-footer {
+                line-height: 0;
+                padding: 0;
+                text-align: center;
+                background-color: white;
+                dir-pagination-controls {
+                    ul.pagination {
+                        margin: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

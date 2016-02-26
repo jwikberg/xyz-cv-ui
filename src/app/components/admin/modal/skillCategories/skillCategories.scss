@@ -1,0 +1,67 @@
+@import "styles/_base";
+@import "styles/_colors";
+
+.skill-categories-modal {
+    .edit-skills-list {
+        overflow: hidden;
+        max-width: 100%;
+        zoom: 1;
+        .edit-skills-list-item {
+            width: 100%;
+            zoom: 1;
+            overflow: hidden;
+            text-overflow: clip;
+            white-space:nowrap;
+            .item-content {
+                display: flex;
+                flex-flow: row wrap;
+            }
+            .item-buttons {
+                width: 40px;
+                min-width: 40px;
+            }
+            .deletebutton {
+                min-width: 100%;
+                max-width: 100%;
+                display: inline-block;
+                color: rgba(255, 255, 255, 1);
+                background-color: red;
+                text-align: center;
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .editbutton {
+                min-width: 100%;
+                max-width: 100%;
+                display: inline-block;
+                color: rgba(255, 255, 255, 1);
+                background-color: #337ab7;
+                text-align: center;
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .name {
+                font-weight: bold;
+                flex-basis: 100%;
+            }
+            .level {
+                width: 70px;
+                flex-basis: 33%;
+            }
+            .years {
+                flex-basis: 33%;
+            }
+            .futureLevel {
+                width: 100px;
+                flex-basis: 33%;
+            }
+        }
+
+    }
+    .pagination-container {
+        line-height: 0;
+        ul.pagination {
+            margin: 5px;
+        }
+    }
+}
