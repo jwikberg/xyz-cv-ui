@@ -53,10 +53,11 @@
         
         /* MODAL */
 
-        function showModal(modal, block) {
+        function showModal(modal, block, editSkillGroup) {
             vm.currentModal = modal;
             var locals = {
                 block: angular.copy(block),
+                editSkillGroup: angular.copy(editSkillGroup),
                 callback: activate
             };
             vm.currentModal.activate(locals);

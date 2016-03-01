@@ -87,7 +87,6 @@
             position: absolute;
             right: 15px;
             top: 0;
-            background-color: white;
             display: inline-block;
             width: 40px;
             height: 40px;
@@ -140,6 +139,12 @@
                 padding: 2px 6px;
                 margin: 0 2px;
                 display: inline-block;
+            }
+            p {
+                display: inline;
+            }
+            .list-group-item:first-child {
+                background-color: whitesmoke;
             }
         }
         .table.table-skills {

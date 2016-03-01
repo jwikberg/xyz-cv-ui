@@ -8,16 +8,20 @@
                     </div>
                 </div>
                 <div class="panel-heading">
-                    Uncategorized Skills
-                </div>
-                <div class="editbutton" ng-click="vm.showModal(vm.skillCategoriesModal, vm.skills)" ng-show="vm.isAllowed('canEditUser') || vm.isSelf(vm.user._id)">
-                    <i class="fa fa-edit"></i>
-                </div>
-                <div class="panel-body" ng-if="(vm.skills | filter: { skillGroupId: '!' }).length > 0">
-                    There are currently {{ (vm.skills | filter: { skillGroupId: '!' }).length }} uncategorized skills.
+                    Skills
                 </div>
                 <div class="panel-body" ng-if="(vm.skills | filter: { skillGroupId: '!' }).length === 0">
                     There are currently no uncategorized skills.
+                </div>
+                <div class="data-box" ng-if="vm.skills.length > 0">
+                    <ul class="list-group" ng-repeat="skillGroup in vm.skillGroups | orderBy: 'name'">
+                        <li class="list-group-item">{{ skillGroup.name }}<div class="editbutton" ng-click="vm.showModal(vm.skillCategoriesModal, vm.skills, skillGroup);" ng-show="vm.isAllowed('canEditUser') || vm.isSelf(vm.user._id)"><i class="fa fa-edit"></i></div></li>
+                        <li class="list-group-item"><p ng-repeat="skill in vm.skills | filter: { skillGroupId: skillGroup._id }">{{skill.name}}{{$last ? '' : ', '}}</p></li>
+                    </ul>
+                    <ul ng-if="(vm.skills | filter: { emptyOrNull:skillGroupId }).length > 0" class="list-group">
+                        <li class="list-group-item"> Uncategorized <div class="editbutton" ng-click="vm.showModal(vm.skillCategoriesModal, vm.skills);" ng-show="vm.isAllowed('canEditUser') || vm.isSelf(vm.user._id)"><i class="fa fa-edit"></i></div></li>
+                        <li class="list-group-item"><p ng-repeat="skill in vm.skills | filter: { skillGroupId: '!' }">{{skill.name}}{{$last ? '' : ', '}}</p></li>
+                    </ul>
                 </div>
             </div>
         </div>

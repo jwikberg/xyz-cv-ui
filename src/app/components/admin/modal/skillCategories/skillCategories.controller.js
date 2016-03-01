@@ -5,32 +5,30 @@
         .module('xyz-cv-ui.admin.modal')
         .controller('SkillCategoriesController', SkillCategoriesController);
 
-        function SkillCategoriesController(SkillCategoriesModal, Skills, SkillGroups, $q, callback) {
+        function SkillCategoriesController(SkillCategoriesModal, Skills, SkillGroups, editSkillGroup, $q, callback) {
             var vm = this;
-            
+
+            vm.editSkillGroup = editSkillGroup;
             vm.skills = [];
             vm.skillGroups = [];
             vm.selectedSkillGroup = {};
             vm.setSkillForEditing = setSkillForEditing;
             vm.skillsToSave = {};
+            vm.skillsToRemove = {};
             vm.save = save;
             vm.selectedSkills = [];
+            vm.selectedSkill = {};
             vm.saveSkill = saveSkill;
+            vm.saveSkills = saveSkills;
+            vm.removeSkillFromGroup = removeSkillFromGroup;
             vm.skillHash = {};
             vm.skillIdHash = {};
             vm.skillGroupHash = {};
             vm.skillGroupIdHash = {};
             vm.isValidSkill = isValidSkill;
+            vm.isValidSkills = isValidSkills;
             vm.hideModal = SkillCategoriesModal.deactivate;
 
-            vm.skillsPage = [];
-            vm.currentPage = 0;
-            vm.nextPage = nextPage;
-            vm.previousPage = previousPage;
-            vm.setPage = setPage;
-            vm.getPageCount = getPageCount;
-            
-            
             activate();
 
             //////////////
@@ -46,20 +44,34 @@
                         vm.skills = values.skills;
                         vm.skillGroups = values.skillGroups;
                         setHashes(vm.skills, vm.skillGroups);
-                        //vm.setPage(0);
                     });
             }
 
-            function isValidSkill() {
+            function isValidSkill(skill) {
+                return vm.editSkillGroup && skill.name && skill.name.length;
+            }
+
+            function isValidSkills() {
                 return vm.selectedSkillGroup.skillGroupId && vm.selectedSkills.length > 0;
             }
 
             // EDIT
             //==================================================================
 
-            function saveSkill(skills) {
+            function saveSkill(skill) {
+                if (skill && skill.name && vm.skillHash[skill.name]) {
+                    editSkill(skill)
+                        .then(function(skill) {
+                            vm.skillsToSave[skill.name] = angular.copy(skill);
+                            delete skill._id;
+                            updateSkillList();
+                        });
+                }
+            }
+
+            function saveSkills(skills) {
                 if (skills.length > 0 && vm.selectedSkillGroup) {
-                    editSkill(skills)
+                    editSkills(skills)
                         .then(function(skills) {
                             skills.forEach(function(skill) {
                                 vm.skillsToSave[skill.name] = angular.copy(skill);
@@ -70,7 +82,18 @@
                 }
             }
 
-            function editSkill(skills) {
+            function editSkill(skill) {
+                return $q(function(resolve) {
+                    var existingSkill = vm.skillHash[skill.name];
+                    skill.skillGroupId = vm.editSkillGroup.name;
+                    existingSkill.skillGroupId = skill.skillGroupId;
+                    existingSkill = convertToSkillGroupId(existingSkill);
+                    vm.skillHash[skill.name] = angular.copy(existingSkill);
+                    return resolve(existingSkill);
+                });
+            }
+
+            function editSkills(skills) {
                 return $q(function(resolve) {
                     var existingSkills = [];
                     skills.forEach(function(skill) {
@@ -85,13 +108,27 @@
                 });
             }
 
+            function removeSkillFromGroup(skill) {
+                return $q(function(resolve) {
+                    var existingSkill = vm.skillHash[skill.name];
+                    existingSkill.skillGroupId = '';
+                    vm.skillHash[skill.name] = angular.copy(existingSkill);
+                    return resolve(existingSkill);
+                })
+                .then(function(skill) {
+                    vm.skillsToRemove[skill.name] = angular.copy(skill);
+                    updateSkillList();
+                });
+            }
+
             function setSkillForEditing(skill) {
-                vm.currentSkill = angular.copy(skill);
-                vm.currentSkill = convertToSkillGroupName(vm.currentSkill);
+                vm.selectedSkill = angular.copy(skill);
+                vm.selectedSkill = convertToSkillGroupName(vm.selectedSkill);
             }
 
             function save() {
-                return saveSkills()
+                return saveEditedSkills()
+                    .then(removeSkillsFromGroup())
                     .then(vm.hideModal)
                     .then(callback);
             }
@@ -121,11 +158,22 @@
                 updateSkillList();
             }
 
-            function saveSkills() {
+            function saveEditedSkills() {
                 return $q(function(resolve) {
                     var promises = [];
                     Object.keys(vm.skillsToSave).map(function(key) {
                         promises.push(vm.skillsToSave[key].$save());
+                    });
+                    return $q.all(promises)
+                        .then(resolve);
+                });
+            }
+
+            function removeSkillsFromGroup() {
+                return $q(function(resolve) {
+                    var promises = [];
+                    Object.keys(vm.skillsToRemove).map(function(key) {
+                        promises.push(vm.skillsToRemove[key].$save());
                     });
                     return $q.all(promises)
                         .then(resolve);
@@ -148,34 +196,7 @@
 
             function updateSkillList() {
                 vm.skills = Object.keys(vm.skillHash).map(function(key){return vm.skillHash[key];});
-                vm.setPage(vm.currentPage);
             }
-
-            function nextPage() {
-                vm.currentPage = vm.currentPage + 1;
-                vm.setPage(vm.currentPage);
-            }
-
-            function previousPage() {
-                vm.currentPage = vm.currentPage - 1;
-                vm.setPage(vm.currentPage);
-            }
-
-            function setPage(pageNumber) {
-                pageNumber = Math.max(pageNumber, 0);
-                pageNumber = Math.min(pageNumber, getPageCount() - 1);
-                vm.currentPage = pageNumber;
-
-                var firstIndex = pageNumber * 7;
-                var lastIndex = Math.min(pageNumber * 7 + 7, vm.skills.length);
-                var indices = lastIndex - firstIndex;
-                vm.skillsPage = vm.skills.slice(firstIndex, lastIndex);
-            }
-
-            function getPageCount() {
-                return Math.ceil(vm.skills.length / 7);
-            }
-
         }
 
 })();
