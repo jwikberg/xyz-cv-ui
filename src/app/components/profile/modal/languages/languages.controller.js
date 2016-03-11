@@ -166,8 +166,8 @@
                     label: 'Basic Knowledge'
                 },
                 {
-                    value: 'Intermidiate',
-                    label: 'Intermidiate'
+                    value: 'Intermediate',
+                    label: 'Intermediate'
                 },
                 {
                     value: 'Fluent',
