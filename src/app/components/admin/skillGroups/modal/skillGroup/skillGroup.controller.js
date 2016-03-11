@@ -195,7 +195,7 @@
         }
 
         function updateSkillList() {
-            vm.skills = Object.keys(vm.skillHash).map(function(key){return vm.skillHash[key];});
+            vm.skills = Object.keys(vm.skillHash).map(function(key) {return vm.skillHash[key];});
         }
     }
 })();
