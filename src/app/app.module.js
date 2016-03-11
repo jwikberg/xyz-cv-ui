@@ -30,7 +30,9 @@
         'xyz-cv-ui.office',
         'xyz-cv-ui.feed',
         'xyz-cv-ui.advancedSearch',
-        'xyz-cv-ui.updatedList'
+        'xyz-cv-ui.updatedList',
+        'xyz-cv-ui.admin',
+        'xyz-cv-ui.admin.skillGroups'
     ]);
 
 })();

@@ -1,0 +1,151 @@
+@import "styles/_base";
+@import "styles/_colors";
+
+
+.admin {
+
+    .panel-wrapper {
+        background: transparent;
+        min-height: 116px;
+    }
+
+    .image-panel {
+        text-align: center;
+        color: $bodybackground;
+        background-color: white;
+        .image-wrapper {
+            position: relative;
+            >img {
+                vertical-align: top;
+            }
+            >i {
+                @media(max-width: 992px) {
+                    font-size: 80px;
+                    margin-top: 20px;
+                    margin-left: 20px;
+                }
+            }
+            overflow: hidden;
+            @media(min-width: 992px) {
+                @include box-shadow(0 1px 2px rgba(0,0,0,0.2));
+                height: 116px;
+                width: 116px;
+                position: absolute;
+                left: -111px;
+                font-size: 80px;
+                line-height: 116px;
+                >img {
+                    height: 116px;
+                    width: 116px;
+                    top: 0;
+                    left: 0;
+                    z-index: 0;
+                    position: absolute;
+                }
+                >i {
+                    top: 0;
+                    left: 0;
+                    z-index: 0;
+                    position: absolute;
+                    width: 116px;
+                    height: 116px;
+                    background-color: white;
+                    line-height: 116px;
+                }
+                >.image-overlay {
+                    display: flex;
+                    z-index: 1;
+                    position: absolute;
+                    height: 116px;
+                    width: 116px;
+                    background: rgba(0,0,0,.75);
+                    text-align: center;
+                    opacity: 0;
+                    cursor: pointer;
+                    -webkit-transition: opacity .25s ease;
+                    -moz-transition: opacity .25s ease;
+                    &:hover {
+                        opacity: 1;
+                    }
+                    >i {
+                        width: 100%;
+                        text-align: center;
+                        line-height: 116px;
+                        color:rgba(255,255,255,.85);
+                        font-size:80px;
+                    }
+                }
+            }
+        }
+    }
+
+    .admin-default {
+        .editbutton {
+            position: absolute;
+            right: 15px;
+            top: 0;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+            &:hover {
+                background-color: lightgrey;
+            }
+        }
+        overflow: hidden;
+        display: block;
+        .data-box {
+            padding: 15px;
+            width: 100%;
+            .name {
+                display: inline-block;
+            }
+            .list-group-item:first-child {
+                background-color: whitesmoke;
+            }
+            .ul-columns {
+                -moz-column-count: 3;
+                -moz-column-gap: 20px;
+                -webkit-column-count: 3;
+                -webkit-column-gap: 20px;
+                column-count: 3;
+                column-gap: 20px;
+                @media(max-width: 992px) {
+                    -moz-column-count: 2;
+                    -moz-column-gap: 20px;
+                    -webkit-column-count: 2;
+                    -webkit-column-gap: 20px;
+                    column-count: 2;
+                }
+            }
+            .ul-columns li {
+                list-style: none;
+            }
+        }
+    }
+
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: opacity .15s linear;
+        &.ng-enter {
+            opacity: .0;
+            &.ng-enter-active {
+                opacity: .5;
+            }
+        }
+        &.ng-leave {
+            opacity: .5;
+            &.ng-leave-active {
+                opacity: 0;
+            }
+        }
+    }
+
+    .alert {
+        display: block;
+        margin-top: 15px;
+    }
+}

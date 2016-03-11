@@ -1,0 +1,76 @@
+<div class="modal skill-group-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span ng-if="vm.editSkillGroup">{{ vm.editSkillGroup.name }}</span>
+                <span ng-if="!vm.editSkillGroup">Uncategorized</span>
+                <button class="close" ng-click="vm.hideModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form ng-if="vm.editSkillGroup" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Skill</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" ng-model="vm.selectedSkill.name" bs-options="skill.name as skill.name for skill in vm.skills" placeholder="Name" bs-typeahead>
+                        </div>
+                    </div>
+                </form>
+                <form ng-if="!vm.editSkillGroup" class="form-horizontal">
+                    <label class="col-md-3 control-label">Skill Group</label>
+                    <div class="col-md-9">
+                        <div class="row buffer-down">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <select class="form-control" ng-model="vm.selectedSkillGroup.skillGroupId" data-html="1" bs-options="skillGroup.name as skillGroup.name for skillGroup in vm.skillGroups" bs-select placeholder="Choose skill group...">
+                                        Action <span class="caret"></span>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div ng-if="vm.editSkillGroup" class="row buffer-down">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary pull-right" ng-disabled="!vm.isValidSkill(vm.selectedSkill)" ng-click="vm.addSkill(vm.selectedSkill)">Add</button>
+                    </div>
+                </div>
+                <div ng-if="!vm.editSkillGroup" class="row buffer-down">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary pull-right" ng-disabled="!vm.isValidSkills()" ng-click="vm.saveSkills(vm.selectedSkills)">Save</button>
+                    </div>
+                </div>
+                <ul ng-if="!vm.editSkillGroup" class="list-group compact edit-skills-list">
+                    <li class="list-group-item edit-skills-list-item" ng-repeat="skill in vm.skills | orderBy: 'name'" ng-if="!skill.skillGroupId">
+                        <div class="item-content">
+                            <div class="name">{{ skill.name }}</div>
+                        </div>
+                        <div class="item-buttons">
+                            <button class="editbutton" ng-if="!skill.disabled" ng-disabled="skill.disabled" ng-click="skill.disabled = true; vm.selectedSkills.push(skill);">
+                                <i class="fa fa-plus "></i>
+                            </button>
+                            <button class="deletebutton" ng-if="skill.disabled" ng-disabled="!skill.disabled" ng-click="skill.disabled = false; vm.selectedSkills.splice(vm.selectedSkills.indexOf(skill), 1);">
+                                <i class="fa fa-minus "></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+                <ul ng-if="vm.editSkillGroup" class="list-group compact edit-skills-list">
+                    <li class="list-group-item edit-skills-list-item" ng-repeat="skill in vm.skills | filter: { skillGroupId: vm.editSkillGroup._id }">
+                        <div class="item-buttons">
+                            <div class="deletebutton" ng-click="vm.removeSkillFromGroup(skill)">
+                                <i class="fa fa-trash"></i>
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <div class="name">{{ skill.name }}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" ng-click="vm.hideModal()">Close</button>
+                <button class="btn btn-primary" ng-click="vm.save()">Confirm changes</button>
+            </div>
+        </div>
+    </div>
+</div>

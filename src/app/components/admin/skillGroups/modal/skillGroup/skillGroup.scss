@@ -1,0 +1,56 @@
+@import "styles/_base";
+@import "styles/_colors";
+
+.skill-group-modal {
+    .edit-skills-list {
+        overflow: hidden;
+        min-height: 420px;
+        max-height: 420px;
+        overflow-y: auto;
+        max-width: 100%;
+        zoom: 1;
+        .edit-skills-list-item {
+            width: 100%;
+            zoom: 1;
+            overflow: hidden;
+            text-overflow: clip;
+            white-space:nowrap;
+            .item-content {
+                display: flex;
+                flex-flow: row wrap;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+            .item-buttons {
+                width: 40px;
+                min-width: 40px;
+            }
+            .deletebutton {
+                min-width: 100%;
+                max-width: 100%;
+                display: inline-block;
+                color: rgba(255, 255, 255, 1);
+                background-color: red;
+                text-align: center;
+                line-height: 58px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .editbutton {
+                min-width: 100%;
+                max-width: 100%;
+                display: inline-block;
+                color: rgba(255, 255, 255, 1);
+                background-color: #337ab7;
+                text-align: center;
+                line-height: 58px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .name {
+                font-weight: bold;
+                flex-basis: 100%;
+            }
+        }
+    }
+}

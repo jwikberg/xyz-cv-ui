@@ -1,0 +1,47 @@
+<div class="modal edit-skill-groups-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Edit Skill Groups
+                <button class="close" ng-click="vm.hideModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Name</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" ng-model="vm.currentSkillGroup.newName" placeholder="Name">
+                        </div>
+                    </div>
+                </form>
+                <div class="row buffer-down">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary pull-right" ng-disabled="!vm.isValidSkillGroup(vm.currentSkillGroup)" ng-click="vm.addSkillGroup(vm.currentSkillGroup)" ng-if="!vm.isEditMode()">Add</button>
+                        <button class="btn btn-primary pull-right" ng-disabled="!vm.isValidSkillGroup(vm.currentSkillGroup)" ng-click="vm.saveSkillGroup(vm.currentSkillGroup)" ng-if="vm.isEditMode()">Save</button>
+                    </div>
+                </div>
+                <ul class="list-group compact edit-skills-list">
+                    <li class="list-group-item edit-skills-list-item" ng-repeat="skillGroup in vm.skillGroups">
+                        <div class="item-buttons">
+                            <div class="deletebutton" ng-click="vm.removeSkillGroup(skillGroup)">
+                                <i class="fa fa-trash"></i>
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <div class="name">{{ skillGroup.name }}</div>
+                        </div>
+                        <div class="item-buttons">
+                            <div class="editbutton" ng-click="vm.setSkillGroupForEditing(skillGroup)">
+                                <i class="fa fa-edit"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" ng-click="vm.hideModal()">Close</button>
+                <button class="btn btn-primary" ng-click="vm.save()">Confirm changes</button>
+            </div>
+        </div>
+    </div>
+</div>
