@@ -22,6 +22,8 @@
             vm.isValidSkillGroup = isValidSkillGroup;
             vm.hideModal = EditSkillGroupsModal.deactivate;
             vm.isEditMode = isEditMode;
+            vm.orderUp = orderUp;
+            vm.orderDown = orderDown;
 
             activate();
 
@@ -53,6 +55,7 @@
             function addSkillGroup(skillGroup) {
                 if (skillGroup && skillGroup.newName && !vm.skillGroupHash[skillGroup.newName]) {
                     skillGroup.name = skillGroup.newName;
+                    skillGroup.order = (vm.skillGroups.length + 1);
                     skillGroup = new SkillGroups(skillGroup);
                     vm.skillGroupHash[skillGroup.name] = angular.copy(skillGroup);
                     vm.skillGroupsToSave[skillGroup.name] = angular.copy(skillGroup);
@@ -89,7 +92,15 @@
 
             function removeSkillGroup(skillGroup) {
                 vm.skillGroupsToRemove[skillGroup.name] = angular.copy(skillGroup);
+                vm.skillGroups.forEach(function(x) {
+                    if (x.order > skillGroup.order) {
+                        x.order--;
+                        vm.skillGroupsToSave[x.name] = angular.copy(x);
+                    }
+                });
+
                 delete vm.skillGroupHash[skillGroup.name];
+                delete vm.skillGroupsToSave[skillGroup.name];
                 updateSkillGroupList();
             }
 
@@ -152,6 +163,42 @@
 
             function updateSkillGroupList() {
                 vm.skillGroups = Object.keys(vm.skillGroupHash).map(function(key){return vm.skillGroupHash[key];});
+            }
+
+            function orderUp(skillGroup) {
+                if (skillGroup.order) {
+                    var above = {};
+                    vm.skillGroups.forEach(function(x) {
+                        if (x.order === (skillGroup.order - 1)) {
+                            above = x;
+                        }
+                    });
+
+                    skillGroup.order--;
+                    above.order++;
+
+                    vm.skillGroupsToSave[above.name] = angular.copy(above);
+                    vm.skillGroupsToSave[skillGroup.name] = angular.copy(skillGroup);
+
+                    updateSkillGroupList();
+                }
+            }
+
+            function orderDown(skillGroup) {
+                var below = {};
+                vm.skillGroups.forEach(function(x) {
+                    if (x.order === (skillGroup.order + 1)) {
+                        below = x;
+                    }
+                });
+
+                below.order--;
+                skillGroup.order++;
+
+                vm.skillGroupsToSave[below.name] = angular.copy(below);
+                vm.skillGroupsToSave[skillGroup.name] = angular.copy(skillGroup);
+
+                updateSkillGroupList();
             }
         }
 })();

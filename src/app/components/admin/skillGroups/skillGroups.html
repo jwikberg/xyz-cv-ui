@@ -15,7 +15,7 @@
                     There are currently no uncategorized skills.
                 </div>
                 <div class="data-box" ng-if="vm.skills.length > 0">
-                    <ul class="list-group" ng-repeat="skillGroup in vm.skillGroups | orderBy: 'name'">
+                    <ul class="list-group" ng-repeat="skillGroup in vm.skillGroups | orderBy: 'order'">
                         <li class="list-group-item">
                             {{ skillGroup.name }}
                             <div class="editbutton" ng-click="vm.showModal(vm.skillGroupModal, vm.skills, skillGroup);" ng-show="vm.isAllowed('canEditSkill')">

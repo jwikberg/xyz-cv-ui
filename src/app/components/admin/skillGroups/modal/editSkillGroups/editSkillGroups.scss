@@ -49,6 +49,16 @@
                 font-weight: bold;
                 flex-basis: 100%;
             }
+            .order {
+                line-height: 48px;
+                margin-right: 5px;
+                .order-up {
+                    cursor: pointer;
+                }
+                .order-down {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

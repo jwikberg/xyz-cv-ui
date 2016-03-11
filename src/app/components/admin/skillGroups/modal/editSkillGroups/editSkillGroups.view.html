@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <ul class="list-group compact edit-skills-list">
-                    <li class="list-group-item edit-skills-list-item" ng-repeat="skillGroup in vm.skillGroups">
+                    <li class="list-group-item edit-skills-list-item" ng-repeat="skillGroup in vm.skillGroups | orderBy: 'order'">
                         <div class="item-buttons">
                             <div class="deletebutton" ng-click="vm.removeSkillGroup(skillGroup)">
                                 <i class="fa fa-trash"></i>
@@ -29,6 +29,10 @@
                         </div>
                         <div class="item-content">
                             <div class="name">{{ skillGroup.name }}</div>
+                        </div>
+                        <div class="order" ng-if="vm.skillGroups.length > 0">
+                            <i ng-if="skillGroup.order != 1" class="fa fa-arrow-up order-up" ng-click="vm.orderUp(skillGroup)"></i>
+                            <i ng-if="skillGroup.order != (vm.skillGroups | filter: { order: '' }).length && skillGroup.order" class="fa fa-arrow-down order-down" ng-click="vm.orderDown(skillGroup)"></i>
                         </div>
                         <div class="item-buttons">
                             <div class="editbutton" ng-click="vm.setSkillGroupForEditing(skillGroup)">
