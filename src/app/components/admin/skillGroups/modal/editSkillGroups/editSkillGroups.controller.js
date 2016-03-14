@@ -5,13 +5,15 @@
         .module('xyz-cv-ui.admin.skillGroups.modal')
         .controller('EditSkillGroupsController', EditSkillGroupsController);
 
-    function EditSkillGroupsController(EditSkillGroupsModal, SkillGroups, $q, callback) {
+    function EditSkillGroupsController(EditSkillGroupsModal, Skills, SkillGroups, $q, callback) {
         var vm = this;
 
+        vm.skills = [];
         vm.skillGroups = [];
         vm.setSkillGroupForEditing = setSkillGroupForEditing;
         vm.skillGroupsToSave = {};
         vm.skillGroupsToRemove = {};
+        vm.skillsToSave = {};
         vm.save = save;
         vm.currentSkillGroup = {};
         vm.saveSkillGroup = saveSkillGroup;
@@ -31,11 +33,13 @@
 
         function activate() {
             var promises = {
+                skills: Skills.query().$promise,
                 skillGroups: SkillGroups.query().$promise
             };
 
             $q.all(promises)
                 .then(function(values) {
+                    vm.skills = values.skills;
                     vm.skillGroups = values.skillGroups;
                     setHashes(vm.skillGroups);
                 });
@@ -99,6 +103,13 @@
                 }
             });
 
+            vm.skills.forEach(function(skill) {
+                if (skill.skillGroupId === skillGroup._id) {
+                    skill.skillGroupId = null;
+                    vm.skillsToSave[skill.name] = angular.copy(skill);
+                }
+            });
+
             delete vm.skillGroupHash[skillGroup.name];
             delete vm.skillGroupsToSave[skillGroup.name];
             updateSkillGroupList();
@@ -120,6 +131,7 @@
         function save() {
             return saveSkillGroups()
                 .then(removeSkillGroups())
+                .then(saveSkills())
                 .then(vm.hideModal)
                 .then(callback);
         }
@@ -155,6 +167,17 @@
                 var promises = [];
                 Object.keys(vm.skillGroupsToRemove).map(function(key) {
                     promises.push(vm.skillGroupsToRemove[key].$delete());
+                });
+                return $q.all(promises)
+                    .then(resolve);
+            });
+        }
+
+        function saveSkills() {
+            return $q(function(resolve) {
+                var promises = [];
+                Object.keys(vm.skillsToSave).map(function(key) {
+                    promises.push(vm.skillsToSave[key].$save());
                 });
                 return $q.all(promises)
                     .then(resolve);

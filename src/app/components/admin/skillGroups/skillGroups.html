@@ -23,7 +23,7 @@
                             </div>
                         </li>
                         <div class="list-group-item ul-columns">
-                            <li ng-repeat="skill in vm.skills | filter: { skillGroupId: skillGroup._id }">
+                            <li ng-repeat="skill in vm.skills | filter: { skillGroupId: skillGroup._id } | orderBy: 'name'">
                                 {{ skill.name }}
                             </li>
                         </div>
@@ -36,7 +36,7 @@
                             </div>
                         </li>
                         <div class="list-group-item ul-columns">
-                            <li ng-repeat="skill in vm.skills | filter: { skillGroupId: '!' }">
+                            <li ng-repeat="skill in vm.skills | filter: { skillGroupId: '!' } | orderBy: 'name'">
                                 {{ skill.name }}
                             </li>
                         </div>
