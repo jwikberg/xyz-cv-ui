@@ -2,8 +2,6 @@
 @import "styles/_colors";
 
 .edit-assignments-list {
-	min-height: 400px;
-	max-height: 400px;
     overflow: hidden;
     max-width: 100%;
     zoom: 1;
@@ -64,4 +62,8 @@
 		.description {
 		}
 	}
+    .empty-panel-body {
+        text-align: center;
+        padding: 15px;
+    }
 }

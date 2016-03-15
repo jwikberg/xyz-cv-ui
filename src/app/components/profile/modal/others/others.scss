@@ -3,8 +3,6 @@
 
 .others-modal {
     .edit-others-list {
-        min-height: 420px;
-        max-height: 420px;
         overflow: hidden;
         max-width: 100%;
         zoom: 1;
@@ -62,7 +60,10 @@
                 flex-basis: 33%;
             }
         }
-
+        .empty-panel-body {
+            text-align: center;
+            padding: 15px;
+        }
     }
     .pagination-container {
         line-height: 0;

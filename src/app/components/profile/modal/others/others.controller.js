@@ -224,7 +224,7 @@
                 vm.currentPage = pageNumber;
 
                 var firstIndex = pageNumber * 7;
-                var lastIndex = Math.min(pageNumber * 10 + 10, vm.connectors.length);
+                var lastIndex = Math.min(pageNumber * 7 + 7, vm.connectors.length);
                 vm.connectorsPage = vm.connectors.slice(firstIndex, lastIndex);
             }
 

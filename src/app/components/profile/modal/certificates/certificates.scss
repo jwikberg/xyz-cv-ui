@@ -3,8 +3,6 @@
 
 .certificates-modal {
     .edit-certificates-list {
-        min-height: 400px;
-        max-height: 400px;
         overflow: hidden;
         max-width: 100%;
         zoom: 1;
@@ -59,6 +57,10 @@
                 font-weight: bold;
                 width: 175px;
             }
+        }
+        .empty-panel-body {
+            text-align: center;
+            padding: 15px;
         }
     }
 }

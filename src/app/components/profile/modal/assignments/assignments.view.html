@@ -76,6 +76,9 @@
                             </div>
 						</div>
 					</li>
+                    <div class="empty-panel-body" ng-if="vm.connectorsPage.length === 0">
+                        No added assignments
+                    </div>
 				</ul>
 				<div class="pagination-container" ng-if="vm.getPageCount() > 0">
                     <ul class="pagination">

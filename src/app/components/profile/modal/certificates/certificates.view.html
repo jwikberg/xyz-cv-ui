@@ -13,14 +13,12 @@
 							<input type="text" class="form-control" ng-model="vm.currentConnector.name" bs-options="certificate.name as certificate.name for certificate in vm.certificates" placeholder="Name" ng-change="vm.certificateNameChanged(vm.currentConnector.name)" bs-typeahead required>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label class="col-md-3 control-label">Description</label>
 						<div class="col-md-9">
 							<text-angular ta-toolbar="[['bold','italics'], ['ul', 'ol'], ['insertLink']]" ng-model="vm.currentConnector.description" bs-options="certificate.description as certificate.description for certificate in vm.certificates" placeholder="Description" ng-change="vm.certificateDescriptionChanged(vm.currentConnector.description)"></text-angular>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label class="col-md-3 control-label">Skills</label>
 						<div class="col-md-9">
@@ -79,6 +77,9 @@
                             </div>
 						</div>
 					</li>
+                    <div class="empty-panel-body" ng-if="vm.connectorsPage.length === 0">
+                        No added certificates or educations
+                    </div>
 				</ul>
 				<div class="pagination-container" ng-if="vm.getPageCount() > 0">
                     <ul class="pagination">
