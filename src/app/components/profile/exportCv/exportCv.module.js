@@ -1,9 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('xyz-cv-ui.profile', [
-        'xyz-cv-ui.profile.exportCv',
-        'xyz-cv-ui.profile.modal',
+    angular.module('xyz-cv-ui.profile.exportCv', [
         'shared.skills',
         'shared.languages',
         'shared.others',
