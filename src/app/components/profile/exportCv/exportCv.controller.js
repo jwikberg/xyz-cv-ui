@@ -22,6 +22,7 @@
             /* MODAL */
 
             vm.word = {};
+            vm.user = '';
 
             session.isLoaded()
                 .then(activate);
@@ -32,12 +33,17 @@
                 ExportCvModel.get({_id: $routeParams.userId})
                     .$promise.then(function(model) {
                         setDoc(model);
+                        setUserName(model);
                         vm.activated = true;
                     });
             }
 
             function setDoc(model) {
                 vm.word = model.user.word;
+            }
+            
+            function setUserName(model) {
+                vm.user = model.user.name;
             }
         }
 })();
