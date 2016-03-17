@@ -178,55 +178,6 @@
                 width: 40px;
             }
         }
-        &.skillrow {
-            .image-box {
-                color: #3D606E;
-                .fa-flask {
-                    color: #e0e0e0;
-                }
-            }
-            .data-box {
-                padding-left: 0;
-                .name {
-                    display: inline-block;
-                    .fa-star{
-                        display: inline-block;
-                        color: #FFD700;
-                    }
-                }
-                .level {
-                    display: inline-block;
-                }
-                .year {
-                    display: inline-block;
-                }
-            }
-
-            .endorsements {
-                text-align: right;
-                line-height: 60px;
-                .count {
-                    background-color: #B0D3E0;
-                    @include border-radius(5px);
-                    display: inline-block;
-                    color: grey;
-                    max-height: 24px;
-                    min-height: 24px;
-                    line-height: 1em;
-                    padding: 4px;
-                }
-                .endorsement {
-                    display: inline-block;
-                    img {
-                        min-height: 24px;
-                        max-height: 24px;
-                        max-width: 24px;
-                        @include border-radius(5px);
-                        margin-left: 1px;
-                    }
-                }
-            }
-        }
         &.assignmentrow {
             min-height: 75px;
         }
@@ -354,6 +305,26 @@
                     }
                 }
             }
+        }
+        .heading {
+            padding: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+        .skill-group {
+            padding: 8px;
+            background-color: whitesmoke;
+            font-weight: bold;
+            border-bottom: 2px solid #ddd;
+            border-top: 1px solid #ddd;
+        }
+        .skill {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .fa-star{
+            display: inline-block;
+            color: #FFD700;
         }
     }
 

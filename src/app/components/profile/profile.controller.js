@@ -72,6 +72,9 @@
             /* SKILLS */
             vm.skills = [];
 
+            /* SKILLGROUPS */
+            vm.skillGroups = [];
+
             /* LANGUAGES */
             vm.languages = [];
 
@@ -115,6 +118,7 @@
                         setPrivateInfo(model);
                         setSummary(model);
                         setSkills(model);
+                        setSkillGroups(model);
                         setLanguages(model);
                         setOthers(model);
                         setCertificates(model);
@@ -179,6 +183,10 @@
 
             function setSkills(model) {
                 vm.skills = model.user.skills;
+            }
+
+            function setSkillGroups(model) {
+                vm.skillGroups = model.user.skillGroups;
             }
 
             function setLanguages(model) {

@@ -197,57 +197,53 @@
             <div class="editbutton" ng-click="vm.showModal(vm.skillsModal, vm.skills)" ng-show="vm.isAllowed('canEditUser') || vm.isSelf(vm.user._id)">
                 <i class="fa fa-edit"></i>
             </div>
-            <div class="itemrow skillrow" ng-class="{'removeTopBorder': $first}" dir-paginate="skill in vm.skills | itemsPerPage: 15">
-                <div class="image-box">
-                    <i class="{{ skill.icon }}"></i>
+            <div ng-if="vm.skills.length > 0">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="col-xs-6 col-md-6 heading">Name</div>
+                        <div class="col-xs-2 col-md-2 heading">Now</div>
+                        <div class="col-xs-2 col-md-2 heading">Goal</div>
+                        <div class="col-xs-2 col-md-2 heading">Years</div>
+                    </div>
                 </div>
-                <div class="data-box">
+                <div ng-repeat="skillGroup in vm.skillGroups | orderBy: 'order'" ng-if="(vm.skills | filter: { skillGroupId: skillGroup._id }).length > 0">
                     <div class="row">
-                        <div class="col-xs-12 col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="name">
-                                        {{ skill.name }}
-                                        <i class="fa fa-star" ng-show="skill.expertise"></i>
-                                        <i class="fa fa-arrow-up" ng-show="skill.experience"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 year">
-                                    {{ skill.years }}
-                                    <ng-pluralize
-                                        count=skill.years
-                                        when="{'1': ' year',
-                                        'other': ' years'}" >
-                                    </ng-pluralize>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="level" ng-class="'l' + skill.level">
-                                        Level {{ skill.level }}
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="futureLevel" ng-show ="skill.futureLevel != null"  ng-class="'l' + skill.futureLevel">
-                                        Future level {{ skill.futureLevel }}
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-xs-12 col-md-12 skill-group">
+                            <div class="col-xs-12 col-md-12">{{ skillGroup.name }}</div>
                         </div>
-                        <div class="col-xs-6 col-md-6" ng-if="skill.endorsements">
-                            <div class="endorsements">
-                                <div class="count">5 <i class="fa fa-thumbs-up"></i></div>
-                                <div class="endorsement" ng-repeat="pic in ['profilepic.png', 'gimli-cage.jpg', 'legolas-cage.jpg', 'gustavpihl.jpeg']">
-                                    <img ng-src="{{'assets/' + pic}}">
-                                </div>
-                                ...
+                    </div>
+                    <div ng-repeat="skill in vm.skills | filter: { skillGroupId: skillGroup._id }" class="row">
+                        <div class="col-xs-12 col-md-12 skill">
+                            <div class="col-xs-6 col-md-6">
+                                {{ skill.name }}
+                                <i class="fa fa-star" ng-show="skill.expertise"></i>
+                                <i class="fa fa-arrow-up" ng-show="skill.experience"></i>
                             </div>
+                            <div class="col-xs-2 col-md-2">{{ skill.level }}</div>
+                            <div class="col-xs-2 col-md-2">{{ skill.futureLevel }}</div>
+                            <div class="col-xs-2 col-md-2">{{ skill.years }}</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-footer" ng-if="vm.skills.length > 15">
-                <dir-pagination-controls></dir-pagination-controls>
+                <div ng-if="(vm.skills | filter: { skillGroupId: '!' }).length > 0">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 skill-group">
+                            <div class="col-xs-6 col-md-6">Uncategorized</div>
+                        </div>
+                    </div>
+                    <div ng-repeat="skill in vm.skills | filter: { skillGroupId: '!' }" class="row">
+                        <div class="col-xs-12 col-md-12 skill">
+                            <div class="col-xs-6 col-md-6">
+                                {{ skill.name }}
+                                <i class="fa fa-star" ng-show="skill.expertise"></i>
+                                <i class="fa fa-arrow-up" ng-show="skill.experience"></i>
+                            </div>
+                            <div class="col-xs-2 col-md-2">{{ skill.level }}</div>
+                            <div class="col-xs-2 col-md-2">{{ skill.futureLevel }}</div>
+                            <div class="col-xs-2 col-md-2">{{ skill.years }}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="empty-panel-body" ng-if="vm.skills.length === 0">
                 Empty
