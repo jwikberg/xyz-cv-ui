@@ -1,0 +1,48 @@
+<div class="row admin" ng-if="vm.isAllowed('canViewAdmin')">
+    <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 col-sm-12" ng-show="vm.activated">
+        <div class="panel-wrapper">
+            <div class="panel panel-default admin-default">
+                <div class="image-panel hidden-xs hidden-sm">
+                    <div class="image-wrapper">
+                        <i class="fa fa-flask"></i>
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    Skill Groups
+                    <div class="editbutton" ng-click="vm.showModal(vm.editSkillGroupsModal, vm.skillGroups);" ng-show="vm.isAllowed('canEditSkillGroup')"><i class="fa fa-edit"></i></div>
+                </div>
+                <div class="panel-body" ng-if="(vm.skills | filter: { skillGroupId: '!' }).length === 0">
+                    There are currently no uncategorized skills.
+                </div>
+                <div class="data-box" ng-if="vm.skills.length > 0">
+                    <ul class="list-group" ng-repeat="skillGroup in vm.skillGroups | orderBy: 'order'">
+                        <li class="list-group-item">
+                            {{ skillGroup.name }}
+                            <div class="editbutton" ng-click="vm.showModal(vm.skillGroupModal, vm.skills, skillGroup);" ng-show="vm.isAllowed('canEditSkill')">
+                                <i class="fa fa-edit"></i>
+                            </div>
+                        </li>
+                        <div class="list-group-item ul-columns">
+                            <li ng-repeat="skill in vm.skills | filter: { skillGroupId: skillGroup._id } | orderBy: 'name'">
+                                {{ skill.name }}
+                            </li>
+                        </div>
+                    </ul>
+                    <ul ng-if="(vm.skills | filter: { skillGroupId: '!' }).length > 0" class="list-group">
+                        <li class="list-group-item">
+                            Uncategorized
+                            <div class="editbutton" ng-click="vm.showModal(vm.skillGroupModal, vm.skills);" ng-show="vm.isAllowed('canEditSkill')">
+                                <i class="fa fa-edit"></i>
+                            </div>
+                        </li>
+                        <div class="list-group-item ul-columns">
+                            <li ng-repeat="skill in vm.skills | filter: { skillGroupId: '!' } | orderBy: 'name'">
+                                {{ skill.name }}
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

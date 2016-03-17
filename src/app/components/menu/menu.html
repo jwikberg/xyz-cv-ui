@@ -65,14 +65,6 @@
                 </a>
             </li>
             <li>
-                <a ng-href="#/export" ng-show="vm.isAllowed('canViewDashboard')">
-                    <div class="sidebar-icon pull-left">
-                        <i class="fa fa-table"></i>
-                    </div>
-                    Export raw data
-                </a>
-            </li>
-            <li>
                 <a ng-href="#/access" ng-hide="true">
                     <div class="sidebar-icon pull-left">
                         <i class="fa fa-shield"></i>
@@ -87,6 +79,26 @@
                     </div>
                     Settings
                 </a>
+            </li>
+            <li>
+                <a bs-collapse-toggle>
+                    <div class="sidebar-icon pull-left">
+                        <i class="fa fa-cogs"></i>
+                    </div>
+                    Admin
+                </a>
+                <div class="sidebar-nav-list panel-collapse" bs-collapse-target>
+                    <div class="list-item">
+                        <a ng-href="#/admin/skillGroups">
+                            <i class="fa fa-cogs"></i> Skill Groups
+                        </a>
+                    </div>
+                    <div class="list-item">
+                        <a ng-href="#/export">
+                            <i class="fa fa-table"></i> Export raw data
+                        </a>
+                    </div>
+                </div>
             </li>
             <li>
                 <a ng-href="http://bit.ly/kushmanual" target="_blank" ng-show="vm.isAllowed('canViewDashboard')">
