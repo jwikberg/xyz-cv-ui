@@ -173,4 +173,9 @@
             }
         }
     }
+
+    .news-panel-body{
+        padding: 15px;
+        color: lighten($textcolor, 20%);
+    }
 }
