@@ -1,4 +1,5 @@
-<div>
-    Test
-    <a download="{{vm.user}} - CV.docx" href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,{{vm.word}}">Download</a>
+<div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 col-sm-12 panel-wrapper">
+    <div class="panel" ng-show="vm.activated">
+        <a class="btn btn-default" href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,{{vm.word}}" download="{{vm.user}} - CV.docx"><i class="fa fa-file-word-o"></i> Download CV</a>
+    </div>
 </div>
