@@ -5,7 +5,7 @@
         .module('xyz-cv-ui.profile')
         .controller('ProfileController', ProfileController);
 
-        function ProfileController(ProfileModel, $routeParams, session, API_URL, GeneralInfoModal, ImageModal, PrivateInfoModal, SummaryModal, SkillsModal, AssignmentsModal, LanguagesModal, OthersModal, CoursesModal, CertificatesModal) {
+        function ProfileController(ProfileModel, ExportCvModel, $routeParams, session, API_URL, GeneralInfoModal, ImageModal, PrivateInfoModal, SummaryModal, SkillsModal, AssignmentsModal, LanguagesModal, OthersModal, CoursesModal, CertificatesModal) {
 
             var vm = this;
             window.vm = vm;
@@ -13,6 +13,8 @@
             vm.API_URL = API_URL;
             vm.activated = false;
             vm.user = {};
+
+            vm.exportCv = exportCv;
 
             /* SESSION */
             vm.isAllowed = session.isAllowed;
@@ -296,6 +298,17 @@
 
             function setCertificatesModal() {
                 vm.certificatesModal = CertificatesModal;
+            }
+
+            function exportCv() {
+                var doc = null;
+                ExportCvModel.get({_id: $routeParams.userId})
+                    .$promise.then(function(model) {
+                        var downloadLink = angular.element('<a></a>');
+                        downloadLink.attr('href','data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + model.user.word);
+                        downloadLink.attr('download', vm.user.name + ' - CV.docx');
+                        downloadLink[0].click();
+                    });
             }
         }
 })();
